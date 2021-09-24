@@ -26,17 +26,15 @@ namespace Finansys.Dominio.Entidades
             this.UsuarioId = usuarioId;
             this.Name = name;
             this.Descricao = descricao;
+            
         }
-
-        internal Categoria(string id, string usuarioId, string name, string descricao)
+        public Categoria(string id, string usuarioId, string nome, string descricao)
         {
             this.CategoriaId = id;
-            this.UsuarioId = usuarioId;
-            this.Name = name;
-            this.Descricao = descricao;
-
+            UsuarioId = usuarioId;
+            Name = nome;
+            Descricao = descricao;
         }
-
 
         public void AlterarCategoria(string name, string descricao)
         {
@@ -44,8 +42,10 @@ namespace Finansys.Dominio.Entidades
             {
                 throw new ArgumentNullException("Nome Obrigatório");
             }
+
             this.Name = name;
             this.Descricao = descricao;
+
         }
     }
 }

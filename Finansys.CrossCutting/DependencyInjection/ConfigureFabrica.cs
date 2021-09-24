@@ -9,9 +9,9 @@ namespace Finansys.CrossCutting.DependencyInjection
         public static void ConfigureDependencyFabrica(IServiceCollection serviceCollection)
         {
 
-            serviceCollection.AddTransient<ICategoriaFabrica, CategoriaFabrica>();
-            serviceCollection.AddTransient<ILancamentoFabrica, LancamentoFabrica>();
-
+            serviceCollection.AddScoped<ICategoriaFabrica, CategoriaFabrica>();
+            serviceCollection.AddScoped<ILancamentoFabrica, LancamentoFabrica>();
+            serviceCollection.AddScoped<ICategoriaOrcamentoFabrica, CategoriaOrcamentoFabrica>();
         }
 
 

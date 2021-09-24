@@ -14,9 +14,9 @@ namespace Finansys.Dominio.Entidades
 
         public string Nome { get; private set; }
 
-        public string CategoriaId { get; set; }
+        public string CategoriaOrcamentoId { get; set; }
 
-        public Categoria Categoria { get; private set; }
+        public CategoriaOrcamento CategoriaOrcamento { get; private set; }
 
         public DateTime Data { get; private set; }
 
@@ -26,11 +26,13 @@ namespace Finansys.Dominio.Entidades
 
         public double Valor { get; private set; }
 
+        public string ControleOrcamentarioId { get; private set; }
+
 
 
 
         
-        public Lancamento(string nome, string categoriaId, Categoria cat,DateTime data, string descricao, TipoLancamento tipo, double valor, string usuarioId)
+        public Lancamento(string nome, string categoriaOrcamentoId, CategoriaOrcamento cat,DateTime data, string descricao, TipoLancamento tipo, double valor, string usuarioId, string controleOrcamentarioId)
         {
             if (String.IsNullOrEmpty(nome))
             {
@@ -47,13 +49,14 @@ namespace Finansys.Dominio.Entidades
             
             this.LancamentoId = Guid.NewGuid().ToString();
             this.Nome = nome;
-            this.Categoria = cat;
-            this.CategoriaId = categoriaId;
+            this.CategoriaOrcamento = cat;
+            this.CategoriaOrcamentoId = categoriaOrcamentoId;
             this.Data = data;
             this.Descricao = descricao;
             this.TipoLancamento = tipo;
             this.Valor = valor;
             this.UsuarioId = usuarioId;
+            this.ControleOrcamentarioId = controleOrcamentarioId;
         }
         public Lancamento()
         {
@@ -70,25 +73,14 @@ namespace Finansys.Dominio.Entidades
             {
                 throw new ArgumentNullException("Deve existir uma categoria.");
             }
-            // if (data.Date > DateTime.Today)
-            // {
-            //     throw new ArgumentException("A data deve ser menor que a data atual");
-            // }
+            
 
             this.Nome = nome;
-            this.CategoriaId = cat;
+            this.CategoriaOrcamentoId = cat;
             this.Data = data;
             this.Descricao = descricao;
             this.TipoLancamento = tipo;
             this.Valor = valor;
         }
-
-        public bool IsPago()
-        {
-            return DateTime.UtcNow >= Data;
-        }
-
-
-
     }
 }

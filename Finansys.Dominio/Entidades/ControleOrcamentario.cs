@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Finansys.Dominio.Enums;
 
-namespace Finansys.Data.Repository.DTOs
+namespace Finansys.Dominio.Entidades
 {
-    public class ControleOrcamentarioDTO
+    public class ControleOrcamentario
     {
-        [Key]
-        [MaxLength(50)]
         public string ControleOrcamentarioId { get; set; }
 
         public DateTime Inicio { get; private set; }
@@ -21,26 +19,20 @@ namespace Finansys.Data.Repository.DTOs
 
         public double ValorMensal { get; set; }
 
-        public List<LancamentoDTO> LancamentosDTOs = new List<LancamentoDTO>();
-
         public string UsuarioId { get; set; }
 
         public double Despesa { get; set; }
 
         public double Saldo { get; set; }
 
-        public ControleOrcamentarioDTO(string controleOrcamentarioId, DateTime inicio, DateTime fim, string mesReferencia, double valor, string usuarioId)
+        public ControleOrcamentario(DateTime inicio, DateTime fim, string mesReferencia, double valorMensal, string usuarioId)
         {
-            ControleOrcamentarioId = controleOrcamentarioId;
+            ControleOrcamentarioId = Guid.NewGuid().ToString();
             Inicio = inicio;
             Fim = fim;
             MesReferencia = mesReferencia;
-            ValorMensal = valor;
+            ValorMensal = valorMensal;
             this.UsuarioId = usuarioId;
-        }
-        public ControleOrcamentarioDTO()
-        {
-
         }
     }
 }

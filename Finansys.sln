@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finansys.Aplicacao", "Finansys.Aplicacao\Finansys.Aplicacao.csproj", "{4E60DC90-ADA2-41FA-BB03-236074C9BB01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finansys.Aplicacao", "Finansys.Aplicacao\Finansys.Aplicacao.csproj", "{4E60DC90-ADA2-41FA-BB03-236074C9BB01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fynansys.CrossCutting", "Finansys.CrossCutting\Fynansys.CrossCutting.csproj", "{2EDA22BC-E964-4425-AA02-DCE0B0DC85DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fynansys.CrossCutting", "Finansys.CrossCutting\Fynansys.CrossCutting.csproj", "{2EDA22BC-E964-4425-AA02-DCE0B0DC85DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finansys.Data", "Finansys.Data\Finansys.Data.csproj", "{ACA9009C-4545-4842-97EE-E44444C309B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finansys.Data", "Finansys.Data\Finansys.Data.csproj", "{ACA9009C-4545-4842-97EE-E44444C309B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finansys.Dominio", "Finansys.Dominio\Finansys.Dominio.csproj", "{FA7C75AB-E3DC-4D8D-913B-3014993CB79F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finansys.Dominio", "Finansys.Dominio\Finansys.Dominio.csproj", "{FA7C75AB-E3DC-4D8D-913B-3014993CB79F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finansys.Service", "Finansys.Service\Finansys.Service.csproj", "{C398235B-4836-4703-898E-1976EE79F676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finansys.Service", "Finansys.Service\Finansys.Service.csproj", "{C398235B-4836-4703-898E-1976EE79F676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testes", "Testes\Testes.csproj", "{05C66B6B-5F29-41D0-8A3E-54D336D11E32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4E60DC90-ADA2-41FA-BB03-236074C9BB01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +85,23 @@ Global
 		{C398235B-4836-4703-898E-1976EE79F676}.Release|x64.Build.0 = Release|Any CPU
 		{C398235B-4836-4703-898E-1976EE79F676}.Release|x86.ActiveCfg = Release|Any CPU
 		{C398235B-4836-4703-898E-1976EE79F676}.Release|x86.Build.0 = Release|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Debug|x64.Build.0 = Debug|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Debug|x86.Build.0 = Debug|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Release|x64.ActiveCfg = Release|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Release|x64.Build.0 = Release|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Release|x86.ActiveCfg = Release|Any CPU
+		{05C66B6B-5F29-41D0-8A3E-54D336D11E32}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3E7F607-89F1-4B2B-8902-3A2B4E13C747}
 	EndGlobalSection
 EndGlobal

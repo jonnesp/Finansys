@@ -17,9 +17,10 @@ namespace Finansys.Aplicacao.CasosDeUso
 
         public string Nome { get; set; }
         public string Descricao { get; set; }
-
-
+        public double ValorLimite { get; set; }
         public string UsuarioId { get; set; }
+
+
     }
 
     public class AtualizarCategoriaRequestHandler : IRequestHandler<AtualizarCategoriaRequest, GenericResponse>

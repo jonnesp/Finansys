@@ -19,9 +19,11 @@ namespace Finansys.Data.Repository.DTOs
         [MaxLength(255)]
         public string Descricao { get; set; }
 
-        public CategoriaDTO(string CategoriaId, string usuarioId, string name, string descricao)
+        
+
+        public CategoriaDTO(string categoriaId, string usuarioId, string name, string descricao)
         {
-            this.CategoriaId = CategoriaId;
+            this.CategoriaId = categoriaId;
             UsuarioId = usuarioId;
             Name = name;
             Descricao = descricao;

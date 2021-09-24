@@ -40,7 +40,12 @@ namespace Finansys.Data.Repository.DTOs
         [Required]
         public double Valor { get; private set; }
 
-        public LancamentoDTO(string LancamentoId, string Nome, string CategoriaId, DateTime data,string descricao, TipoLancamento TipoLancamento, double valor, string usuarioId)
+        public string ControleOrcamentarioId { get;  set; }
+
+        [ForeignKey("ControleOrcamentarioId")]
+        public ControleOrcamentarioDTO ControleOrcamentarioDTO { get; set;  }
+
+        public LancamentoDTO(string LancamentoId, string Nome, string CategoriaId, DateTime data,string descricao, TipoLancamento TipoLancamento, double valor, string usuarioId,string controleOrcamentarioId)
         {
             this.LancamentoId = LancamentoId;
             this.Nome = Nome;
@@ -50,6 +55,7 @@ namespace Finansys.Data.Repository.DTOs
             this.TipoLancamento = TipoLancamento;
             this.Valor = valor;
             this.UsuarioId = usuarioId;
+            this.ControleOrcamentarioId = controleOrcamentarioId;
         }
 
 

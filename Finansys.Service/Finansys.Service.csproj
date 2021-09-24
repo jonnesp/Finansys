@@ -7,9 +7,14 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="newtonsoft.json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +22,6 @@
     <ProjectReference Include="..\Finansys.Aplicacao\Finansys.Aplicacao.csproj" />
     <ProjectReference Include="..\Finansys.Data\Finansys.Data.csproj" />
     <ProjectReference Include="..\Finansys.CrossCutting\Fynansys.CrossCutting.csproj" />
-    
   </ItemGroup>
 
 </Project>

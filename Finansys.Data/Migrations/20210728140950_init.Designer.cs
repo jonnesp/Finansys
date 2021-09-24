@@ -3,14 +3,16 @@ using System;
 using Finansys.Data.Repository.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Finansys.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210728140950_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,16 +48,13 @@ namespace Finansys.Data.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("OrcamentoId")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<double>("SaldoDisponivel")
-                        .HasColumnType("double");
+                    b.Property<string>("OrcamentoDTOControleOrcamentarioId")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("UsuarioId")
                         .HasColumnType("longtext");
-
-                    b.Property<double>("ValorCreditado")
-                        .HasColumnType("double");
 
                     b.Property<double>("ValorJaGasto")
                         .HasColumnType("double");
@@ -65,7 +64,7 @@ namespace Finansys.Data.Migrations
 
                     b.HasKey("CategoriaId", "OrcamentoId");
 
-                    b.HasIndex("OrcamentoId");
+                    b.HasIndex("OrcamentoDTOControleOrcamentarioId");
 
                     b.ToTable("CategoriaOrcamento");
                 });
@@ -112,8 +111,11 @@ namespace Finansys.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("ControleOrcamentarioId")
+                    b.Property<string>("ControleOrcamentarioDTOControleOrcamentarioId")
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ControleOrcamentarioId")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
@@ -141,7 +143,7 @@ namespace Finansys.Data.Migrations
 
                     b.HasIndex("CategoriaId");
 
-                    b.HasIndex("ControleOrcamentarioId");
+                    b.HasIndex("ControleOrcamentarioDTOControleOrcamentarioId");
 
                     b.ToTable("Tb_Lancamentos");
                 });
@@ -156,9 +158,7 @@ namespace Finansys.Data.Migrations
 
                     b.HasOne("Finansys.Data.Repository.DTOs.ControleOrcamentarioDTO", "OrcamentoDTO")
                         .WithMany()
-                        .HasForeignKey("OrcamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrcamentoDTOControleOrcamentarioId");
 
                     b.Navigation("CategoriaDTO");
 
@@ -173,7 +173,7 @@ namespace Finansys.Data.Migrations
 
                     b.HasOne("Finansys.Data.Repository.DTOs.ControleOrcamentarioDTO", "ControleOrcamentarioDTO")
                         .WithMany()
-                        .HasForeignKey("ControleOrcamentarioId");
+                        .HasForeignKey("ControleOrcamentarioDTOControleOrcamentarioId");
 
                     b.Navigation("Categoria");
 

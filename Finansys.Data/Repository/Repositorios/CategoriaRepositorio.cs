@@ -9,7 +9,7 @@ using Finansys.Dominio.Entidades;
 using Finansys.Dominio.Fabricas;
 using Microsoft.EntityFrameworkCore;
 
-namespace Finansys.Data.Repository
+namespace Finansys.Data.Repository.Repositorios
 {
     public class CategoriaRepositorio : ICategoriaRepositorio
     {
@@ -18,16 +18,14 @@ namespace Finansys.Data.Repository
 
         public ICategoriaFabrica CategoriaFabrica { get; set; }
 
-        private DbSet<CategoriaDTO> _dataSet;
+        private readonly DbSet<CategoriaDTO> _dataSet;
 
-        private ICategoriaFabrica _categoriaFabrica;
-
-        public CategoriaRepositorio(Context context, ICategoriaFabrica fabrica, ICategoriaFabrica categoriaFabrica)
+        public CategoriaRepositorio(Context context, ICategoriaFabrica fabrica)
         {
             _context = context;
             CategoriaFabrica = fabrica;
             _dataSet = context.Set<CategoriaDTO>();
-            _categoriaFabrica = categoriaFabrica;
+            
         }
 
         public async Task<bool> Apagar(string usuarioId, string categoriaId)
@@ -46,9 +44,9 @@ namespace Finansys.Data.Repository
                     return false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -63,9 +61,9 @@ namespace Finansys.Data.Repository
                     await _context.SaveChangesAsync();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -76,13 +74,13 @@ namespace Finansys.Data.Repository
                 List<Categoria> cat = new List<Categoria>();
                 foreach (var x in await _dataSet.Where(x => x.UsuarioId == usuarioid).ToListAsync())
                 {
-                    cat.Add(_categoriaFabrica.Criar(x.CategoriaId, x.Name, x.Descricao, x.UsuarioId));
+                    cat.Add(CategoriaFabrica.Criar(x.CategoriaId, x.Name, x.Descricao, x.UsuarioId));
                 }
                 return cat;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -90,15 +88,15 @@ namespace Finansys.Data.Repository
         {
             try
             {
+
                 var catDto = await _dataSet.SingleOrDefaultAsync(p => p.CategoriaId.Equals(categoriaId) && p.UsuarioId.Equals(usuarioId));
-                return _categoriaFabrica.Criar(catDto.CategoriaId, catDto.UsuarioId, catDto.Name, catDto.Descricao);
-
-
+                return CategoriaFabrica.Criar(catDto.CategoriaId, catDto.UsuarioId, catDto.Name, catDto.Descricao);
+            
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
         }
 
@@ -110,10 +108,10 @@ namespace Finansys.Data.Repository
                 _dataSet.Add(catDto);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
         }
     }

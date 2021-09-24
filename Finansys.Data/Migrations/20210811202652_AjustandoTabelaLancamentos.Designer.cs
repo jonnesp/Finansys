@@ -3,14 +3,16 @@ using System;
 using Finansys.Data.Repository.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Finansys.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210811202652_AjustandoTabelaLancamentos")]
+    partial class AjustandoTabelaLancamentos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,14 +50,8 @@ namespace Finansys.Data.Migrations
                     b.Property<string>("OrcamentoId")
                         .HasColumnType("varchar(50)");
 
-                    b.Property<double>("SaldoDisponivel")
-                        .HasColumnType("double");
-
                     b.Property<string>("UsuarioId")
                         .HasColumnType("longtext");
-
-                    b.Property<double>("ValorCreditado")
-                        .HasColumnType("double");
 
                     b.Property<double>("ValorJaGasto")
                         .HasColumnType("double");

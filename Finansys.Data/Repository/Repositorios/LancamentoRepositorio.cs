@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Finansys.Aplicacao.Interfaces;
+using Finansys.Data.Conversor;
 using Finansys.Data.Repository.Contexto;
 using Finansys.Data.Repository.DTOs;
 using Finansys.Dominio.Entidades;
 using Finansys.Dominio.Fabricas;
 using Microsoft.EntityFrameworkCore;
 
-namespace Finansys.Data.Repository
+namespace Finansys.Data.Repository.Repositorios
 {
     public class LancamentoRepositorio : ILancamentoRepositorio
     {
         protected readonly Context _context;
+
         private DbSet<LancamentoDTO> _dataSet;
 
-        private DbSet<CategoriaDTO> _categoriaDTO;
+        private DbSet<CategoriaOrcamentoDTO> _categoriaOrcamentoDTO;
 
         private ILancamentoFabrica _lancamentoFabrica;
 
@@ -24,7 +26,7 @@ namespace Finansys.Data.Repository
         {
             _context = context;
             _dataSet = context.Set<LancamentoDTO>();
-            _categoriaDTO = _context.Set<CategoriaDTO>();
+            _categoriaOrcamentoDTO = _context.Set<CategoriaOrcamentoDTO>();
             _lancamentoFabrica = lancamentoFabrica;
         }
         public async Task Apagar(string lancamentoId, string usuarioId)
@@ -38,9 +40,9 @@ namespace Finansys.Data.Repository
                     await _context.SaveChangesAsync();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -60,9 +62,9 @@ namespace Finansys.Data.Repository
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -73,16 +75,18 @@ namespace Finansys.Data.Repository
                 List<Lancamento> lancamentos = new List<Lancamento>();
                 foreach (var x in await _dataSet.Where(x => x.UsuarioId == usuarioId).ToListAsync())
                 {
-                    var categoriaDto = await _categoriaDTO.SingleOrDefaultAsync(p => p.CategoriaId == x.CategoriaId);
-                    var cat = ConversorDTO.converterCategoriaDTOParaCategoria(categoriaDto);
-                    lancamentos.Add(_lancamentoFabrica.Criar(x.LancamentoId, x.Nome, cat,x.Data, x.Descricao, x.TipoLancamento
-                                      , x.Valor, x.UsuarioId));
+                    var categoriaOrcamentoDto = await _categoriaOrcamentoDTO.SingleOrDefaultAsync(p => p.CategoriaId == x.CategoriaId);
+
+                    var cat = ConversorDTO.ConverterCategoriaOrcamentoDTOParaCategoriaOrcamento(categoriaOrcamentoDto);
+
+                    lancamentos.Add(_lancamentoFabrica.Criar(x.LancamentoId, x.Nome, cat, x.Data, x.Descricao, x.TipoLancamento
+                                      , x.Valor, x.UsuarioId, x.ControleOrcamentarioId));
                 }
                 return lancamentos;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -94,20 +98,21 @@ namespace Finansys.Data.Repository
                 if (result != null)
                 {
                     var lancamentoDto = result;
-                    var categoriaDto = await _categoriaDTO.SingleOrDefaultAsync(x => x.CategoriaId == lancamentoDto.CategoriaId);
-                    var cat = ConversorDTO.converterCategoriaDTOParaCategoria(categoriaDto);
+                    var categoriaDto = await _categoriaOrcamentoDTO.SingleOrDefaultAsync(x => x.CategoriaId == lancamentoDto.CategoriaId);
+                    var cat = ConversorDTO.ConverterCategoriaOrcamentoDTOParaCategoriaOrcamento(categoriaDto);
+
                     return _lancamentoFabrica.Criar(lancamentoId, lancamentoDto.Nome, cat, lancamentoDto.Data, lancamentoDto.Descricao, lancamentoDto.TipoLancamento
-                                          , lancamentoDto.Valor, lancamentoDto.UsuarioId);
+                                          , lancamentoDto.Valor, lancamentoDto.UsuarioId, lancamentoDto.ControleOrcamentarioId);
                 }
                 else
                 {
                     return new Lancamento();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
         }
 
@@ -123,9 +128,9 @@ namespace Finansys.Data.Repository
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -133,15 +138,15 @@ namespace Finansys.Data.Repository
         {
             try
             {
-                var lancamentoDto = new LancamentoDTO(lancamento.LancamentoId, lancamento.Nome, CategoriaId,lancamento.Data, lancamento.Descricao
-                                                        , lancamento.TipoLancamento, lancamento.Valor, lancamento.UsuarioId);
+                var lancamentoDto = new LancamentoDTO(lancamento.LancamentoId, lancamento.Nome, CategoriaId, lancamento.Data, lancamento.Descricao
+                                                        , lancamento.TipoLancamento, lancamento.Valor, lancamento.UsuarioId, lancamento.ControleOrcamentarioId);
 
                 _dataSet.Add(lancamentoDto);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
     }

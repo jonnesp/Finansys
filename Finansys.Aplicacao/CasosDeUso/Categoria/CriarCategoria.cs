@@ -16,7 +16,6 @@ namespace Finansys.Aplicacao.CasosDeUso
 
         public string Descricao { get; set; }
 
-
         public string UsuarioId { get; set; }
     }
 
@@ -34,7 +33,8 @@ namespace Finansys.Aplicacao.CasosDeUso
         {
             try
             {
-                Categoria categoria = new Categoria(request.Nome, request.Descricao, request.UsuarioId);
+                Categoria categoria = new(request.Nome, request.Descricao, request.UsuarioId);
+
                 await CategoriaRepositorio.Inserir(categoria);
                 return GenericResponse.Ok(categoria);
             }
